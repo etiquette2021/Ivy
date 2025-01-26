@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admissions Insights</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0056b3;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+        }
+
+        textarea {
+            white-space: pre-wrap; /* Ensures text wraps properly */
+            line-height: 1.5;
+        }
+
+        input[type="file"] {
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            align-self: flex-start;
+        }
+
+        button:hover {
+            background-color: #003d7a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>College Admissions Insights</h1>
+        <p>Please provide detailed information about your profile to receive customized guidance and probability estimates for university admissions.</p>
+        
+        <form action="/submit" method="post" enctype="multipart/form-data">
+            <!-- User Prompts -->
+            <label for="school_type">Type of School:</label>
+            <input type="text" id="school_type" name="school_type" value="IB School" placeholder="e.g., IB School, Public, or Private">
+            
+            <label for="year">Current Grade/Year:</label>
+            <input type="text" id="year" name="year" value="11th Grade - Norwegian / 10th grade US equivalent" placeholder="e.g., Grade 11, 12th Year">
+            
+            <label for="gpa_ib">GPA or Predicted IB Score:</label>
+            <input type="text" id="gpa_ib" name="gpa_ib" value="38/40" placeholder="e.g., 4.0 GPA or 42/45 IB">
+            
+            <label for="predicted_sat">Predicted SAT Score:</label>
+            <input type="text" id="predicted_sat" name="predicted_sat" value="1450" placeholder="e.g., 1450">
+            
+            <label for="school_name">School Name:</label>
+            <input type="text" id="school_name" name="school_name" value="Oslo International School - IB program" placeholder="e.g., International School of Oslo">
+            
+            <label for="extracurriculars">Extracurricular Activities:</label>
+            <textarea id="extracurriculars" name="extracurriculars" rows="5" placeholder="e.g., Debate team, Varsity Soccer, MUN">Debate team, Varsity Soccer, MUN, Rowing 19th best female under 19 in Norway. Assisted building website to aid in assisting women´s rights in Africa</textarea>
+            
+            <label for="jobs_volunteer">Jobs or Volunteer Activities:</label>
+            <textarea id="jobs_volunteer" name="jobs_volunteer" rows="5" placeholder="e.g., Part-time tutor, Community service projects">Special needs trainer track and field, sailing instructor, Special Olympics in Minnesota 2026, creating Santa AI app for special needs with speech impediments</textarea>
+            
+            <label for="unique_aspects">Unique Aspects of Who You Are:</label>
+            <textarea id="unique_aspects" name="unique_aspects" rows="5" placeholder="e.g., Multilingual, first-generation college student">Multilingual (Norwegian, English) born in US, grew up in Norway from 4 years old to present went to Norwegian public schools until 9th grade, younger brother with severe mental special needs speech, had to look after him after school for many years</textarea>
+            
+            <label for="difficulties">Difficulties You've Experienced in Life:</label>
+            <textarea id="difficulties" name="difficulties" rows="5" placeholder="e.g., Overcame financial challenges, personal obstacles">Difficult adjusting to new Norwegian culture and caring for special needs brother </textarea>
+
+            <!-- File Upload Section -->
+            <label for="teacher_feedback">Upload Teacher Feedback:</label>
+            <input type="file" id="teacher_feedback" name="teacher_feedback" accept=".jpg,.jpeg,.png,.pdf,.txt">
+
+            <label for="report_cards">Upload Report Cards:</label>
+            <input type="file" id="report_cards" name="report_cards" accept=".jpg,.jpeg,.png,.pdf">
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

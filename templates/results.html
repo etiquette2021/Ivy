@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admissions Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>College Admissions Results</h1>
+
+        <!-- Ivy League Schools -->
+        <h2>Ivy League Schools</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>School</th>
+                    <th>Probability (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in sections.ivy %}
+                <tr>
+                    <td>{{ entry.school }}</td>
+                    <td>{{ entry.probability }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Top 10 Public/Private Universities -->
+        <h2>Top 10 Public/Private Universities</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>University</th>
+                    <th>Probability (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in sections.top_10 %}
+                <tr>
+                    <td>{{ entry.university }}</td>
+                    <td>{{ entry.probability }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Cumulative Probabilities -->
+        <h2>Cumulative Probabilities</h2>
+        <ul>
+            {% for probability in sections.cumulative_probabilities %}
+            <li>{{ probability }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Summary of Strengths -->
+        <h2>Summary of Strengths</h2>
+        <ul>
+            {% for strength in sections.strengths %}
+            <li>{{ strength }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Summary of Weaknesses -->
+        <h2>Summary of Weaknesses</h2>
+        <ul>
+            {% for weakness in sections.weaknesses %}
+            <li>{{ weakness }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Strategies for Improvement -->
+        <h2>Strategies for Improvement</h2>
+        <ul>
+            {% for strategy in sections.strategies %}
+            <li>{{ strategy }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Teacher Comments and Report Card Analysis -->
+        <h2>Teacher Comments and Report Card Analysis</h2>
+        <ul>
+            {% for comment in sections.report_card_analysis %}
+            <li>{{ comment }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Back Button -->
+        <div class="navigation">
+            <form action="/" method="get">
+                <button type="submit" class="back-button">Go Back to Submission</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
