@@ -134,7 +134,20 @@ def submit():
             "jobs_volunteer": request.form.get("jobs_volunteer"),
             "unique_aspects": request.form.get("unique_aspects"),
             "difficulties": request.form.get("difficulties"),
+            "early_decision": request.form.get("early_decision") or "early_decision_princeton",
+            "schools_visited": request.form.getlist("schools_visited"),
+            "schools_contacted": request.form.getlist("schools_contacted"),
+            "schools_followed": request.form.getlist("schools_followed"),
+            "academic_focus": request.form.getlist("academic_focus")
         }
+
+        # Log the data to verify
+        logging.info(f"Schools Visited: {user_data['schools_visited']}")
+        logging.info(f"Schools Contacted: {user_data['schools_contacted']}")
+        logging.info(f"Schools Followed: {user_data['schools_followed']}")
+        logging.info(f"Jobs or Volunteer Activities: {user_data['jobs_volunteer']}")
+        logging.info(f"Academic Focus Areas: {user_data['academic_focus']}")
+        logging.info(f"Early Decision School: {user_data['early_decision']}")
 
         # **Save and Process Teacher Recommendation File**
         teacher_feedback_text = ""
@@ -168,38 +181,73 @@ def submit():
         - Jobs or Volunteer Activities: {user_data['jobs_volunteer']}
         - Unique Aspects: {user_data['unique_aspects']}
         - Difficulties: {user_data['difficulties']}
+        - Early Decision/Action: {user_data['early_decision']}
+        - Schools Visited: {', '.join(user_data['schools_visited'])}
+        - Schools Contacted: {', '.join(user_data['schools_contacted'])}
+        - Schools Followed on Social Media: {', '.join(user_data['schools_followed'])}
+        - Academic Focus Areas: {', '.join(user_data['academic_focus'])}
+        - International Background: The student is from Norway, a country known for its strong social responsibility and unique educational system.
 
         Additional Materials:
         - Teacher Comments: {teacher_feedback_text if teacher_feedback_text else "No teacher feedback provided"}
         - Report Card Summary: {report_card_text if report_card_text else "No report card uploaded"}
 
         ### **Return JSON format ONLY.**
+        Please analyze the provided profile and estimate the probability of admission to each school listed below. Consider all aspects of the profile, including academic performance, extracurricular involvement, personal interactions with schools, and the impact of early decision applications. Provide insights on how each factor influences the probability estimates.
+
+        Additionally, analyze the impact of:
+        - Following schools on social media
+        - Campus visits and interactions with admissions officers
+
+        Provide a personality profile ranking for the student per school, considering their unique aspects and experiences.
+
+        Rank schools based on alignment with the student's academic focus areas: {', '.join(user_data['academic_focus'])}.
+
+        Provide a detailed analysis of the jobs and volunteer activities, highlighting how these experiences contribute to the student's profile and potential fit with each school.
+
+        **Find and list admissions regional directors covering Northern Europe, including their emails and phone numbers.**
+
         Ensure the following structure:
         {{
             "ivy": [
-                {{"school": "Harvard University", "probability": "XX%"}},
-                {{"school": "Princeton University", "probability": "XX%"}},
-                {{"school": "Yale University", "probability": "XX%"}},
-                {{"school": "Columbia University", "probability": "XX%"}},
-                {{"school": "University of Pennsylvania", "probability": "XX%"}},
-                {{"school": "Dartmouth College", "probability": "XX%"}},
-                {{"school": "Brown University", "probability": "XX%"}},
-                {{"school": "Cornell University", "probability": "XX%"}}
+                {{"school": "Harvard University", "probability": "XX%", "address": "Cambridge, MA", "student_body": "6700", "freshmen_admitted": "2000"}},
+                {{"school": "Princeton University", "probability": "XX%", "address": "Princeton, NJ", "student_body": "5400", "freshmen_admitted": "1300"}},
+                {{"school": "Yale University", "probability": "XX%", "address": "New Haven, CT", "student_body": "6000", "freshmen_admitted": "1700"}},
+                {{"school": "Columbia University", "probability": "XX%", "address": "New York, NY", "student_body": "6200", "freshmen_admitted": "1400"}},
+                {{"school": "University of Pennsylvania", "probability": "XX%", "address": "Philadelphia, PA", "student_body": "10000", "freshmen_admitted": "2500"}},
+                {{"school": "Dartmouth College", "probability": "XX%", "address": "Hanover, NH", "student_body": "4400", "freshmen_admitted": "1100"}},
+                {{"school": "Brown University", "probability": "XX%", "address": "Providence, RI", "student_body": "7000", "freshmen_admitted": "1700"}},
+                {{"school": "Cornell University", "probability": "XX%", "address": "Ithaca, NY", "student_body": "15000", "freshmen_admitted": "3600"}}
             ],
             "top_10": [
-                {{"university": "Stanford University", "probability": "XX%"}},
-                {{"university": "Massachusetts Institute of Technology", "probability": "XX%"}},
-                {{"university": "California Institute of Technology", "probability": "XX%"}},
-                {{"university": "University of Chicago", "probability": "XX%"}},
-                {{"university": "Duke University", "probability": "XX%"}},
-                {{"university": "Northwestern University", "probability": "XX%"}},
-                {{"university": "Johns Hopkins University", "probability": "XX%"}},
-                {{"university": "University of California, Berkeley", "probability": "XX%"}},
-                {{"university": "University of California, Los Angeles", "probability": "XX%"}},
-                {{"university": "University of Michigan", "probability": "XX%"}}
+                {{"university": "Stanford University", "probability": "XX%", "address": "Stanford, CA", "student_body": "7000", "freshmen_admitted": "1700"}},
+                {{"university": "Massachusetts Institute of Technology", "probability": "XX%", "address": "Cambridge, MA", "student_body": "4500", "freshmen_admitted": "1100"}},
+                {{"university": "California Institute of Technology", "probability": "XX%", "address": "Pasadena, CA", "student_body": "900", "freshmen_admitted": "235"}},
+                {{"university": "University of Chicago", "probability": "XX%", "address": "Chicago, IL", "student_body": "6200", "freshmen_admitted": "1600"}},
+                {{"university": "Duke University", "probability": "XX%", "address": "Durham, NC", "student_body": "6600", "freshmen_admitted": "1750"}},
+                {{"university": "Northwestern University", "probability": "XX%", "address": "Evanston, IL", "student_body": "8000", "freshmen_admitted": "2000"}},
+                {{"university": "Johns Hopkins University", "probability": "XX%", "address": "Baltimore, MD", "student_body": "6000", "freshmen_admitted": "1300"}},
+                {{"university": "University of California, Berkeley", "probability": "XX%", "address": "Berkeley, CA", "student_body": "31000", "freshmen_admitted": "9300"}},
+                {{"university": "University of California, Los Angeles", "probability": "XX%", "address": "Los Angeles, CA", "student_body": "31000", "freshmen_admitted": "5900"}},
+                {{"university": "University of Michigan", "probability": "XX%", "address": "Ann Arbor, MI", "student_body": "29000", "freshmen_admitted": "6900"}},
+                {{"university": "Vanderbilt University", "probability": "XX%", "address": "Nashville, TN", "student_body": "7000", "freshmen_admitted": "1600"}}
             ],
             "cumulative_probabilities": [
-                "Summarize the likelihood of admission to at least one Ivy League or top university."
+                "Provide the overall probability of admission to at least one Ivy League school.",
+                "Provide the overall probability of admission to at least one top university.",
+                "Discuss how the early decision application might impact these probabilities."
+            ],
+            "top_3_schools": [
+                "Rank the top 3 schools with the highest probability of admission."
+            ],
+            "input_attribution": [
+                "Provide attribution of inputs per school to understand which factors are most influential."
+            ],
+            "personality_profile": [
+                "Provide a personality profile ranking for the student per school."
+            ],
+            "academic_focus_alignment": [
+                "List schools that align best with the student's academic focus areas."
             ],
             "strengths": [
                 "List key strengths relevant to admissions."
@@ -212,6 +260,12 @@ def submit():
             ],
             "report_card_analysis": [
                 "Summarize insights from teacher comments and report card."
+            ],
+            "jobs_analysis": [
+                "Analyze the impact of jobs and volunteer activities on the student's profile."
+            ],
+            "admissions_directors": [
+                {{"name": "Director Name", "email": "email@example.com", "phone": "123-456-7890"}}
             ]
         }}
         Ensure each Ivy League school and each top university is **always included** in the JSON response with valid probability estimates.
@@ -219,11 +273,33 @@ def submit():
 
         logging.info("Calling OpenAI API...")
         api_response = query_chatgpt(prompt)
-        return render_template('results.html', sections=api_response)
+
+        # Log the full response for analysis
+        logging.info(f"LLM Response: {api_response}")
+
+        # Check if the response contains the expected data
+        if "error" in api_response:
+            logging.error(f"Error in API response: {api_response['error']}")
+            return jsonify(api_response)
+
+        # Pass the user data to the template
+        return render_template(
+            'results.html',
+            sections=api_response,
+            schools_visited=user_data['schools_visited'],
+            schools_contacted=user_data['schools_contacted'],
+            schools_followed=user_data['schools_followed'],
+            early_decision=user_data['early_decision'],
+            academic_focus=user_data['academic_focus']
+        )
 
     except Exception as e:
         logging.error(f"Error processing request: {str(e)}")
         return jsonify({"error": f"Error processing request: {str(e)}"})
+
+@app.route('/travel-planner')
+def travel_planner():
+    return render_template('travel_planner.html')
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=False)

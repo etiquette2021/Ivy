@@ -62,3 +62,30 @@ ul {
 .back-button:hover {
     background-color: #d32f2f;
 }
+
+.delete-btn {
+    background-color: #d9534f;
+    color: white;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.delete-btn:hover {
+    background-color: #c9302c;
+}
+
+.nav-btn {
+    background-color: #0056b3;
+    color: white;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.nav-btn:hover {
+    background-color: #003d7a;
+}
+
+.unicorn {
+    font-size: 20px; /* Adjust size as needed */
+    margin-left: 5px; /* Add some spacing */
+}

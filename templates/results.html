@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>College Admissions Results</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .check-mark {
+            color: green;
+            font-weight: bold;
+        }
+        .star {
+            color: gold;
+            font-weight: bold;
+        }
+        .twitter {
+            color: #1DA1F2; /* Twitter blue */
+            font-weight: bold;
+        }
+        .unicorn {
+            color: purple;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -17,13 +35,33 @@
                 <tr>
                     <th>School</th>
                     <th>Probability (%)</th>
+                    <th>Address</th>
+                    <th>Undergraduate Student Body</th>
+                    <th>Freshmen Admitted</th>
                 </tr>
             </thead>
             <tbody>
-                {% for entry in sections.ivy %}
+                {% for school in sections['ivy'] %}
                 <tr>
-                    <td>{{ entry.school }}</td>
-                    <td>{{ entry.probability }}</td>
+                    <td>
+                        {{ school['school'] }}
+                        {% if school['school'] in schools_visited %}
+                            <span class="check-mark">✔</span>
+                        {% endif %}
+                        {% if school['school'] in schools_contacted %}
+                            <span class="star">★</span>
+                        {% endif %}
+                        {% if school['school'] in schools_followed %}
+                            <span class="twitter">🐦</span>
+                        {% endif %}
+                        {% if school['school'] == early_decision %}
+                            <span class="unicorn">🦄</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ school['probability'] }}</td>
+                    <td>{{ school['address'] }}</td>
+                    <td>{{ school['student_body'] }}</td>
+                    <td>{{ school['freshmen_admitted'] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -36,13 +74,33 @@
                 <tr>
                     <th>University</th>
                     <th>Probability (%)</th>
+                    <th>Address</th>
+                    <th>Undergraduate Student Body</th>
+                    <th>Freshmen Admitted</th>
                 </tr>
             </thead>
             <tbody>
-                {% for entry in sections.top_10 %}
+                {% for university in sections['top_10'] %}
                 <tr>
-                    <td>{{ entry.university }}</td>
-                    <td>{{ entry.probability }}</td>
+                    <td>
+                        {{ university['university'] }}
+                        {% if university['university'] in schools_visited %}
+                            <span class="check-mark">✔</span>
+                        {% endif %}
+                        {% if university['university'] in schools_contacted %}
+                            <span class="star">★</span>
+                        {% endif %}
+                        {% if university['university'] in schools_followed %}
+                            <span class="twitter">🐦</span>
+                        {% endif %}
+                        {% if university['university'] == early_decision %}
+                            <span class="unicorn">🦄</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ university['probability'] }}</td>
+                    <td>{{ university['address'] }}</td>
+                    <td>{{ university['student_body'] }}</td>
+                    <td>{{ university['freshmen_admitted'] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -53,6 +111,30 @@
         <ul>
             {% for probability in sections.cumulative_probabilities %}
             <li>{{ probability }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Top 3 Schools -->
+        <h2>Top 3 Schools with Highest Admission Probability</h2>
+        <ul>
+            {% for school in sections.top_3_schools %}
+            <li>{{ school }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Personality Profile -->
+        <h2>Personality Profile per School</h2>
+        <ul>
+            {% for profile in sections.personality_profile %}
+            <li>{{ profile }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Input Attribution -->
+        <h2>Input Attribution per School</h2>
+        <ul>
+            {% for attribution in sections.input_attribution %}
+            <li>{{ attribution }}</li>
             {% endfor %}
         </ul>
 
@@ -85,6 +167,37 @@
         <ul>
             {% for comment in sections.report_card_analysis %}
             <li>{{ comment }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Jobs and Volunteer Activities Analysis -->
+        <h2>Jobs and Volunteer Activities Analysis</h2>
+        <ul>
+            {% for analysis in sections.jobs_analysis %}
+            <li>{{ analysis }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Add a section to display the impact of following schools on social media -->
+        <h3>Impact of Following Schools on Social Media</h3>
+        <p>Schools Followed: {{ ', '.join(schools_followed) }}</p>
+        <p>Consider how following these schools might enhance your application profile.</p>
+
+        <!-- Academic Focus Alignment -->
+        <h2>Academic Focus Alignment</h2>
+        <ul>
+            {% for school in sections.academic_focus_alignment %}
+            <li>{{ school }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Admissions Regional Directors -->
+        <h2>Admissions Regional Directors Covering Norway</h2>
+        <ul>
+            {% for director in sections['admissions_directors'] %}
+            <li>
+                {{ director['name'] }} - Email: {{ director['email'] }}, Phone: {{ director['phone'] }}
+            </li>
             {% endfor %}
         </ul>
 

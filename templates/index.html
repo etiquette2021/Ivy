@@ -61,17 +61,40 @@
             margin-bottom: 15px;
         }
 
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 30px; /* Increased margin for more space */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
         button {
             padding: 10px 20px;
-            background-color: #0056b3;
-            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            align-self: flex-start;
+            margin-top: 10px;
+            width: 100%;
         }
 
-        button:hover {
+        .delete-btn {
+            background-color: #d9534f;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .delete-btn:hover {
+            background-color: #c9302c;
+        }
+
+        .nav-btn {
+            background-color: #0056b3;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .nav-btn:hover {
             background-color: #003d7a;
         }
     </style>
@@ -81,34 +104,54 @@
         <h1>College Admissions Insights</h1>
         <p>Please provide detailed information about your profile to receive customized guidance and probability estimates for university admissions.</p>
         
+        <!-- Main Form for User Input -->
         <form action="/submit" method="post" enctype="multipart/form-data">
             <!-- User Prompts -->
             <label for="school_type">Type of School:</label>
-            <input type="text" id="school_type" name="school_type" value="IB School" placeholder="e.g., IB School, Public, or Private">
+            <input type="text" id="school_type" name="school_type" value="IB School - Private" placeholder="e.g., IB School, Public, or Private">
             
             <label for="year">Current Grade/Year:</label>
-            <input type="text" id="year" name="year" value="11th Grade - Norwegian / 10th grade US equivalent" placeholder="e.g., Grade 11, 12th Year">
+            <input type="text" id="year" name="year" value="11th Grade" placeholder="e.g., Grade 11, 12th Year">
             
             <label for="gpa_ib">GPA or Predicted IB Score:</label>
             <input type="text" id="gpa_ib" name="gpa_ib" value="38/40" placeholder="e.g., 4.0 GPA or 42/45 IB">
             
             <label for="predicted_sat">Predicted SAT Score:</label>
-            <input type="text" id="predicted_sat" name="predicted_sat" value="1450" placeholder="e.g., 1450">
+            <input type="text" id="predicted_sat" name="predicted_sat" value="1425" placeholder="e.g., 1450">
             
             <label for="school_name">School Name:</label>
-            <input type="text" id="school_name" name="school_name" value="Oslo International School - IB program" placeholder="e.g., International School of Oslo">
+            <input type="text" id="school_name" name="school_name" value="Oslo International School -6th best IB program in Europe based on IB scores" placeholder="e.g., International School of Oslo">
             
             <label for="extracurriculars">Extracurricular Activities:</label>
-            <textarea id="extracurriculars" name="extracurriculars" rows="5" placeholder="e.g., Debate team, Varsity Soccer, MUN">Debate team, Varsity Soccer, MUN, Rowing 19th best female under 19 in Norway. Assisted building website to aid in assisting women´s rights in Africa</textarea>
+            <textarea id="extracurriculars" name="extracurriculars" rows="5" placeholder="e.g., Debate team, Varsity Soccer, MUN">Debate team, Varsity Soccer, MUN, Rowing — ranked 19th best female rower under 19 in Norway. Developed a website for women's rights. Coding AI programs in Python to assist special needs children's learning. Involved in the nonprofit NFU Bærum to effectuate political change locally for special needs funding. Participating in NTU Bærum to discuss increasing public financing for special needs resources in the local community.</textarea>
             
             <label for="jobs_volunteer">Jobs or Volunteer Activities:</label>
-            <textarea id="jobs_volunteer" name="jobs_volunteer" rows="5" placeholder="e.g., Part-time tutor, Community service projects">Special needs trainer track and field, sailing instructor, Special Olympics in Minnesota 2026, creating Santa AI app for special needs with speech impediments</textarea>
-            
+            <textarea id="jobs_volunteer" name="jobs_volunteer" rows="5" placeholder="e.g., Part-time tutor, Community service projects">
+                As a dedicated special needs trainer, I have honed my ability to adapt and tailor educational experiences to meet diverse needs, demonstrating both patience and empathy. My role as a sailing instructor for children during the summer has not only been a testament to my leadership capabilities but also to my passion for outdoor education and physical activity.
+                Moreover, my volunteer work with Special Olympics in the USA has enriched my understanding of teamwork and community service, reinforcing my commitment to inclusivity and equality. In the realm of technology, I have actively contributed to the development of the Santa AI/Ivy app, showcasing my innovative mindset and technical proficiency. My participation in tech summer programs focused on robotics and programming further attests to my enthusiasm for cutting-edge technology and problem-solving skills.
+                These experiences collectively highlight my multifaceted skill set, unwavering dedication, and readiness to thrive in a dynamic university environment.
+            </textarea>
             <label for="unique_aspects">Unique Aspects of Who You Are:</label>
-            <textarea id="unique_aspects" name="unique_aspects" rows="5" placeholder="e.g., Multilingual, first-generation college student">Multilingual (Norwegian, English) born in US, grew up in Norway from 4 years old to present went to Norwegian public schools until 9th grade, younger brother with severe mental special needs speech, had to look after him after school for many years</textarea>
+            <textarea id="unique_aspects" name="unique_aspects" rows="5" placeholder="e.g., Multilingual, first-generation college student">With fluency in both Norwegian and English, I was born in the US but grew up in Norway. As a dedicated caregiver to my special needs sibling, I have developed a strong sense of responsibility and compassion. In my academic pursuits, I am proud to be the only female student in my higher-level IB programming class, while also excelling in higher-level IB courses in Geography, Computer Science, and Economics.</textarea>
             
             <label for="difficulties">Difficulties You've Experienced in Life:</label>
-            <textarea id="difficulties" name="difficulties" rows="5" placeholder="e.g., Overcame financial challenges, personal obstacles">Difficult adjusting to new Norwegian culture and caring for special needs brother </textarea>
+            <textarea id="difficulties" name="difficulties" rows="5" placeholder="e.g., Overcame financial challenges, personal obstacles">Navigating the cultural landscape of Norway, while providing dedicated care for my severely mentally handicapped younger brother, has been a remarkable journey. Educated in the local Norwegian school system from kindergarten through 8th grade, this experience has instilled in me a profound adaptability. Transitioning to English schools from 9th grade onwards has further enriched my perspective, allowing me to thrive in diverse environments and embrace new opportunities with enthusiasm.</textarea>
+            
+            <!-- Early Decision School Selection -->
+            <label for="early_decision">Early Decision School:</label>
+            <select id="early_decision" name="early_decision">
+                <option value="none">None</option>
+                <option value="princeton" selected>Princeton University</option>
+                <option value="harvard">Harvard University</option>
+                <option value="yale">Yale University</option>
+                <option value="brown">Brown University</option>
+                <option value="stanford">Stanford University</option>
+                <option value="columbia">Columbia University</option>
+                <option value="cornell">Cornell University</option>
+                <option value="dartmouth">Dartmouth College</option>
+                <option value="georgetown">Georgetown University</option>
+                <!-- Add more options as needed -->
+            </select>
 
             <!-- File Upload Section -->
             <label for="teacher_feedback">Upload Teacher Feedback:</label>
@@ -117,9 +160,120 @@
             <label for="report_cards">Upload Report Cards:</label>
             <input type="file" id="report_cards" name="report_cards" accept=".jpg,.jpeg,.png,.pdf">
 
+            <!-- Schools Visited and Contacted -->
+            <label for="schools_visited">Schools Visited:</label>
+            <select id="schools_visited" name="schools_visited" multiple>
+                <option value="Harvard University">Harvard University</option>
+                <option value="Princeton University">Princeton University</option>
+                <option value="Yale University">Yale University</option>
+                <option value="Columbia University">Columbia University</option>
+                <option value="University of Pennsylvania">University of Pennsylvania</option>
+                <option value="Dartmouth College">Dartmouth College</option>
+                <option value="Brown University">Brown University</option>
+                <option value="Cornell University">Cornell University</option>
+                <!-- Non-Ivy League Schools -->
+                <option value="Stanford University">Stanford University</option>
+                <option value="Massachusetts Institute of Technology">Massachusetts Institute of Technology</option>
+                <option value="California Institute of Technology">California Institute of Technology</option>
+                <option value="University of Chicago">University of Chicago</option>
+                <option value="Duke University">Duke University</option>
+                <option value="Northwestern University">Northwestern University</option>
+                <option value="Johns Hopkins University">Johns Hopkins University</option>
+                <option value="University of California, Berkeley">University of California, Berkeley</option>
+                <option value="University of California, Los Angeles">University of California, Los Angeles</option>
+                <option value="University of Michigan">University of Michigan</option>
+                <option value="Vanderbilt University">Vanderbilt University</option>
+                <!-- Add more options as needed -->
+            </select>
+
+            <label for="schools_contacted">Schools Contacted:</label>
+            <select id="schools_contacted" name="schools_contacted" multiple>
+                <option value="Harvard University">Harvard University</option>
+                <option value="Princeton University">Princeton University</option>
+                <option value="Yale University">Yale University</option>
+                <option value="Columbia University">Columbia University</option>
+                <option value="University of Pennsylvania">University of Pennsylvania</option>
+                <option value="Dartmouth College">Dartmouth College</option>
+                <option value="Brown University">Brown University</option>
+                <option value="Cornell University">Cornell University</option>
+                <!-- Non-Ivy League Schools -->
+                <option value="Stanford University">Stanford University</option>
+                <option value="Massachusetts Institute of Technology">Massachusetts Institute of Technology</option>
+                <option value="California Institute of Technology">California Institute of Technology</option>
+                <option value="University of Chicago">University of Chicago</option>
+                <option value="Duke University">Duke University</option>
+                <option value="Northwestern University">Northwestern University</option>
+                <option value="Johns Hopkins University">Johns Hopkins University</option>
+                <option value="University of California, Berkeley">University of California, Berkeley</option>
+                <option value="University of California, Los Angeles">University of California, Los Angeles</option>
+                <option value="University of Michigan">University of Michigan</option>
+                <option value="Vanderbilt University">Vanderbilt University</option>
+                <!-- Add more options as needed -->
+            </select>
+
+            <!-- Following Schools on Social Media -->
+            <label for="schools_followed">Schools Followed on Social Media:</label>
+            <select id="schools_followed" name="schools_followed" multiple>
+                <option value="Harvard University">Harvard University</option>
+                <option value="Princeton University">Princeton University</option>
+                <option value="Yale University">Yale University</option>
+                <option value="Columbia University">Columbia University</option>
+                <option value="University of Pennsylvania">University of Pennsylvania</option>
+                <option value="Dartmouth College">Dartmouth College</option>
+                <option value="Brown University">Brown University</option>
+                <option value="Cornell University">Cornell University</option>
+                <!-- Non-Ivy League Schools -->
+                <option value="Stanford University">Stanford University</option>
+                <option value="Massachusetts Institute of Technology">Massachusetts Institute of Technology</option>
+                <option value="California Institute of Technology">California Institute of Technology</option>
+                <option value="University of Chicago">University of Chicago</option>
+                <option value="Duke University">Duke University</option>
+                <option value="Northwestern University">Northwestern University</option>
+                <option value="Johns Hopkins University">Johns Hopkins University</option>
+                <option value="University of California, Berkeley">University of California, Berkeley</option>
+                <option value="University of California, Los Angeles">University of California, Los Angeles</option>
+                <option value="University of Michigan">University of Michigan</option>
+                <option value="Vanderbilt University">Vanderbilt University</option>
+                <!-- Add more options as needed -->
+            </select>
+
+            <!-- Academic Focus Areas -->
+            <label for="academic_focus">Academic Focus Areas:</label>
+            <select id="academic_focus" name="academic_focus" multiple>
+                <option value="Economics">Economics</option>
+                <option value="Geography">Geography</option>
+                <option value="Programming">Programming</option>
+                <!-- Add more options as needed -->
+            </select>
+
             <!-- Submit Button -->
-            <button type="submit">Submit</button>
+            <button type="submit" class="nav-btn">Submit</button>
         </form>
+
+        <h2>Manage Uploaded Files</h2>
+        <form id="delete-form" action="/delete-file" method="POST">
+            <input type="hidden" name="file_type" id="file_type">
+            <button type="button" class="delete-btn" onclick="deleteFile('teacher_feedback')">Delete Teacher Recommendation</button>
+            <button type="button" class="delete-btn" onclick="deleteFile('report_cards')">Delete Report Card</button>
+        </form>
+
+        <div class="navigation">
+            <form action="/" method="get">
+                <button type="submit" class="nav-btn">Go Back to Submission</button>
+            </form>
+            <form action="/travel-planner" method="get">
+                <button type="submit" class="nav-btn">Go to Travel Planner</button>
+            </form>
+        </div>
     </div>
+
+    <script>
+        function deleteFile(fileType) {
+            if (confirm("Are you sure you want to delete this file?")) {
+                document.getElementById("file_type").value = fileType;
+                document.getElementById("delete-form").submit();
+            }
+        }
+    </script>
 </body>
 </html>
