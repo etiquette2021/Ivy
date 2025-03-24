@@ -4,3 +4,12 @@ __pycache__/
 *.pyc
 # Ignore .env file
 .env
+# Ignore specific uploaded PDFs
+uploads/report_cards.pdf
+uploads/teacher_feedback.pdf
+
+# Optional: ignore all PDFs in uploads
+ uploads/*.pdf
+
+# Optional: ignore entire uploads folder
+ uploads/
